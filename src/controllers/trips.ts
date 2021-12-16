@@ -6,10 +6,16 @@ import { Trip } from '@shared/interfaces'
 export const tripsController = wrapAsync(async (req: Request, res: Response) => {
      const k = req.query.keyword as string // Get query string
      const response = await getData() // Get data from database
+
      const result: Trip[] = [] // Initialize result
 
      if (response && response.data) {
           const data = response.data as Trip[]
+
+          // If there is no keyword, send all data to frontend
+          if (!k) {
+               res.send(data)
+          }
 
           // loop through the data to begin searching
           data.forEach((trip) => {
