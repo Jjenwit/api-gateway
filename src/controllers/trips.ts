@@ -15,6 +15,7 @@ export const tripsController = wrapAsync(async (req: Request, res: Response) => 
           // If there is no keyword, send all data to frontend
           if (!k) {
                res.send(data)
+               return
           }
 
           // loop through the data to begin searching
